@@ -27,6 +27,7 @@ import uy.kohesive.injekt.api.get
 import uy.kohesive.injekt.injectLazy
 import kotlin.math.max
 import kotlin.math.min
+import android.view.animation.DecelerateInterpolator
 
 /**
  * Implementation of a [Viewer] to display pages with a [RecyclerView].
@@ -286,7 +287,7 @@ class WebtoonViewer(val activity: ReaderActivity, val isContinuous: Boolean = tr
         if (config.usePageTransitions) {
             recycler.smoothScrollBy(0, -scrollDistance)
         } else {
-            recycler.scrollBy(0, -scrollDistance)
+            recycler.smoothScrollBy(0, -scrollDistance)
         }
     }
 
@@ -295,9 +296,9 @@ class WebtoonViewer(val activity: ReaderActivity, val isContinuous: Boolean = tr
      */
     private fun scrollDown() {
         if (config.usePageTransitions) {
-            recycler.smoothScrollBy(0, scrollDistance)
+            recycler.smoothScrollBy(0, scrollDistance, DecelerateInterpolator(), 300)
         } else {
-            recycler.scrollBy(0, scrollDistance)
+            recycler.smoothScrollBy(0, scrollDistance)
         }
     }
 
